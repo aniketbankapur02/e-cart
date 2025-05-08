@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>My Orders - Feedback Feature</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom scrollbar for better usability on mobile */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4f46e5; /* Indigo-600 */
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e0e7ff; /* Indigo-100 */
+    }
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      color: #1e293b; /* slate-800 */
+    }
+    .container {
+      max-width: 350px;
+      height: 600px;
+      margin: 1rem auto;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      padding: 1rem 1.5rem;
+      background: #4f46e5; /* Indigo-600 */
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-align: center;
+      user-select: none;
+    }
+    main {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem;
+    }
+    button:focus {
+      outline-offset: 3px;
+      outline: 3px solid #a5b4fc; /* Indigo-300 */
+    }
+    /* For star rating */
+    .star {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #cbd5e1; /* slate-300 */
+      transition: color 0.2s ease;
+    }
+    .star.selected,
+    .star.hovered {
+      color: #fbbf24; /* amber-400 */
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Customer Orders and Feedback">
+    <header id="header-title">Your Orders</header>
+    <main id="content-area" tabindex="0">
+      <!-- Orders list will be rendered here -->
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const orders = [
+        { id: 'orn1234', product: 'Wireless Headphones', status: 'Delivered' },
+        { id: 'orn1235', product: 'Smartphone Case', status: 'Shipped' },
+        { id: 'orn1236', product: 'Running Shoes', status: 'Delivered' },
+        { id: 'orn1237', product: 'Bluetooth Speaker', status: 'Processing' },
+        { id: 'orn1238', product: 'Fitness Tracker', status: 'Delivered' }
+      ];
+
+      let currentView = 'orders'; // orders or feedback
+      let feedbackOrderId = null;
+      let feedbackRating = 0;
+
+      const headerTitle = document.getElementById('header-title');
+      const contentArea = document.getElementById('content-area');
+
+      function renderOrders(){
+        headerTitle.textContent = 'Your Orders';
+        currentView = 'orders';
+        feedbackOrderId = null;
+        contentArea.innerHTML = '';
+
+        if(!orders.length){
+          contentArea.innerHTML = '<p class="text-center text-gray-500 mt-10">You have no orders.</p>';
+          return;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'space-y-5';
+
+        orders.forEach(order => {
+          const li = document.createElement('li');
+          li.className = 'p-4 rounded-lg shadow-sm border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center';
+
+          const info = document.createElement('div');
+          info.className = 'mb-2 sm:mb-0';
+          const productName = document.createElement('p');
+          productName.textContent = order.product;
+          productName.className = 'font-semibold text-lg text-indigo-700';
+
+          const orderId = document.createElement('p');
+          orderId.textContent = `Order ID: ${order.id}`;
+          orderId.className = 'text-sm text-gray-500';
+
+          const status = document.createElement('p');
+          status.textContent = order.status;
+          status.className = `mt-1 font-medium ${
+            order.status === 'Delivered' ? 'text-green-600' : 'text-gray-400'
+          }`;
+
+          info.appendChild(productName);
+          info.appendChild(orderId);
+          info.appendChild(status);
+
+          li.appendChild(info);
+
+          // if delivered, show feedback button
+          if(order.status === 'Delivered'){
+            const btn = document.createElement('button');
+            btn.textContent = 'Give Feedback';
+            btn.setAttribute('aria-label', `Give feedback for order ${order.id}`);
+            btn.className = 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 transition';
+
+            btn.addEventListener('click', () => {
+              renderFeedbackForm(order.id, order.product);
+            });
+
+            li.appendChild(btn);
+          }
+
+          list.appendChild(li);
+        });
+
+        contentArea.appendChild(list);
+        contentArea.focus();
+      }
+
+      function renderFeedbackForm(orderId, productName){
+        currentView = 'feedback';
+        feedbackOrderId = orderId;
+        feedbackRating = 0;
+
+        headerTitle.textContent = `Feedback for ${productName}`;
+
+        contentArea.innerHTML = `
+          <form id="feedback-form" class="flex flex-col space-y-6" novalidate>
+            <div>
+              <label for="feedback-description" class="block text-indigo-700 font-semibold mb-2">Feedback Description<span aria-hidden="true" class="text-red-600">*</span></label>
+              <textarea id="feedback-description" name="feedback-description" rows="4" 
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none" 
+                required
+                aria-required="true"
+                aria-describedby="desc-help"
+                placeholder="Share your experience..."></textarea>
+              <p id="desc-help" class="text-sm text-gray-400 mt-1">Please describe your feedback.</p>
+            </div>
+            <div>
+              <span class="block text-indigo-700 font-semibold mb-2">Rating<span aria-hidden="true" class="text-red-600">*</span></span>
+              <div id="star-rating" class="flex space-x-1" role="radiogroup" aria-label="Rating">
+                <button type="button" class="star" data-value="1" aria-checked="false" role="radio" aria-label="1 star">&#9733;</button>
+                <button type="button" class="star" data-value="2" aria-checked="false" role="radio" aria-label="2 stars">&#9733;</button>
+                <button type="button" class="star" data-value="3" aria-checked="false" role="radio" aria-label="3 stars">&#9733;</button>
+                <button type="button" class="star" data-value="4" aria-checked="false" role="radio" aria-label="4 stars">&#9733;</button>
+                <button type="button" class="star" data-value="5" aria-checked="false" role="radio" aria-label="5 stars">&#9733;</button>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <button type="button" id="cancel-feedback" class="text-indigo-600 hover:underline font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded">Cancel</button>
+              <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 transition">Submit</button>
+            </div>
+          </form>
+        `;
+
+        contentArea.focus();
+
+        // setup rating stars interaction
+        const stars = Array.from(document.querySelectorAll('#star-rating .star'));
+        stars.forEach(star => {
+          star.addEventListener('click', () => {
+            setRating(parseInt(star.dataset.value));
+          });
+          star.addEventListener('mouseover', () => {
+            highlightStars(parseInt(star.dataset.value));
+          });
+          star.addEventListener('mouseout', () => {
+            highlightStars(feedbackRating);
+          });
+        });
+
+        function setRating(value){
+          feedbackRating = value;
+          stars.forEach(s => {
+            const val = parseInt(s.dataset.value);
+            if(val <= value){
+              s.classList.add('selected');
+              s.setAttribute('aria-checked', 'true');
+            } else {
+              s.classList.remove('selected');
+              s.setAttribute('aria-checked', 'false');
+            }
+          });
+        }
+
+        function highlightStars(value){
+          stars.forEach(s => {
+            const val = parseInt(s.dataset.value);
+            if(val <= value){
+              s.classList.add('hovered');
+            } else {
+              s.classList.remove('hovered');
+            }
+          });
+        }
+
+        // Initially no rating selected
+        setRating(0);
+
+        // Cancel button handler
+        document.getElementById('cancel-feedback').addEventListener('click', () => {
+          renderOrders();
+        });
+
+        // Form submission
+        document.getElementById('feedback-form').addEventListener('submit', e => {
+          e.preventDefault();
+          const description = document.getElementById('feedback-description').value.trim();
+
+          // Validation
+          if(description === ''){
+            alert('Please enter feedback description.');
+            document.getElementById('feedback-description').focus();
+            return;
+          }
+          if(feedbackRating === 0){
+            alert('Please select a rating.');
+            return;
+          }
+
+          // Save feedback (simulated)
+          saveFeedback(orderId, description, feedbackRating);
+        });
+      }
+
+      function saveFeedback(orderId, description, rating){
+        // For demo: just show a success message
+        contentArea.innerHTML = `
+          <div class="flex flex-col justify-center items-center h-full text-center px-4">
+            <svg class="w-16 h-16 mb-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <h2 class="text-2xl font-semibold text-green-700 mb-2">Thank you for your feedback!</h2>
+            <p class="text-gray-600 mb-6">Your feedback for order <strong>${orderId}</strong> has been submitted successfully.</p>
+            <button id="back-to-orders" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 transition">Back to Orders</button>
+          </div>
+        `;
+
+        document.getElementById('back-to-orders').addEventListener('click', () => {
+          renderOrders();
+        });
+
+        // Focus confirmation container for accessibility
+        contentArea.focus();
+      }
+
+      // Initial render
+      renderOrders();
+    })();
+  </script>
+</body>
+</html>
+</content>
+</create_file>

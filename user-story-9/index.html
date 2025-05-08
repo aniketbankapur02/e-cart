@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | E-Commerce</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="font-bold text-2xl">ShopEase</a>
+            <div class="flex items-center space-x-6">
+                <a href="products.html" class="hover:text-blue-200">Products</a>
+                <a href="orders.html" class="font-medium border-b-2 border-white">My Orders</a>
+                <a href="cart.html" class="hover:text-blue-200 relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+                </a>
+                <a href="account.html" class="hover:text-blue-200">
+                    <i class="fas fa-user-circle text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">My Orders</h1>
+        
+        <!-- Order Status Filter -->
+        <div class="mb-6 flex flex-wrap gap-2">
+            <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">All Orders</button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded hover:bg-gray-100">Processing</button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded hover:bg-gray-100">Shipped</button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded hover:bg-gray-100">Delivered</button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded hover:bg-gray-100">Cancelled</button>
+        </div>
+        
+        <!-- Orders List -->
+        <div class="space-y-6" id="orders-container">
+            <!-- Order Card 1 (Delivered - with feedback option) -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-order-id="ORD-29873" data-order-status="delivered">
+                <div class="border-b p-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-sm text-gray-500">Order placed on May 1, 2025</span>
+                        <h2 class="font-semibold">Order #ORD-29873</h2>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                            <span class="w-2 h-2 rounded-full bg-green-600 mr-2"></span>
+                            Delivered
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-4 flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-1 gap-4">
+                        <img src="/api/placeholder/100/100" alt="Product" class="w-20 h-20 object-cover rounded">
+                        <div>
+                            <h3 class="font-medium">Premium Bluetooth Headphones</h3>
+                            <p class="text-gray-500">Qty: 1</p>
+                            <p class="font-semibold mt-1">$129.99</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:items-end justify-between gap-2">
+                        <div class="text-sm text-gray-600">
+                            <p>Delivered on: May 5, 2025</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-blue-700 hover:text-blue-800 font-medium">View Details</button>
+                            <a href="feedback.html?order=ORD-29873" class="text-blue-700 hover:text-blue-800 font-medium">Give Feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Card 2 (Delivered - with feedback option) -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-order-id="ORD-29654" data-order-status="delivered">
+                <div class="border-b p-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-sm text-gray-500">Order placed on April 22, 2025</span>
+                        <h2 class="font-semibold">Order #ORD-29654</h2>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                            <span class="w-2 h-2 rounded-full bg-green-600 mr-2"></span>
+                            Delivered
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-4 flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-1 gap-4">
+                        <img src="/api/placeholder/100/100" alt="Product" class="w-20 h-20 object-cover rounded">
+                        <div>
+                            <h3 class="font-medium">Smart Fitness Watch</h3>
+                            <p class="text-gray-500">Qty: 1</p>
+                            <p class="font-semibold mt-1">$199.99</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:items-end justify-between gap-2">
+                        <div class="text-sm text-gray-600">
+                            <p>Delivered on: April 28, 2025</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-blue-700 hover:text-blue-800 font-medium">View Details</button>
+                            <a href="feedback.html?order=ORD-29654" class="text-blue-700 hover:text-blue-800 font-medium">Give Feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Card 3 (Shipped - no feedback option) -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-order-id="ORD-30012" data-order-status="shipped">
+                <div class="border-b p-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-sm text-gray-500">Order placed on May 6, 2025</span>
+                        <h2 class="font-semibold">Order #ORD-30012</h2>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            <span class="w-2 h-2 rounded-full bg-blue-600 mr-2"></span>
+                            Shipped
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-4 flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-1 gap-4">
+                        <img src="/api/placeholder/100/100" alt="Product" class="w-20 h-20 object-cover rounded">
+                        <div>
+                            <h3 class="font-medium">Wireless Charging Pad</h3>
+                            <p class="text-gray-500">Qty: 2</p>
+                            <p class="font-semibold mt-1">$59.98</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:items-end justify-between gap-2">
+                        <div class="text-sm text-gray-600">
+                            <p>Expected delivery: May 10, 2025</p>
+                            <p>Tracking: TRK456789012</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-blue-700 hover:text-blue-800 font-medium">View Details</button>
+                            <button class="text-blue-700 hover:text-blue-800 font-medium">Track Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Card 4 (Processing - no feedback option) -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-order-id="ORD-30089" data-order-status="processing">
+                <div class="border-b p-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-sm text-gray-500">Order placed on May 7, 2025</span>
+                        <h2 class="font-semibold">Order #ORD-30089</h2>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                            <span class="w-2 h-2 rounded-full bg-yellow-600 mr-2"></span>
+                            Processing
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-4 flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-1 gap-4">
+                        <img src="/api/placeholder/100/100" alt="Product" class="w-20 h-20 object-cover rounded">
+                        <div>
+                            <h3 class="font-medium">Portable Power Bank 20000mAh</h3>
+                            <p class="text-gray-500">Qty: 1</p>
+                            <p class="font-semibold mt-1">$49.99</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:items-end justify-between gap-2">
+                        <div class="text-sm text-gray-600">
+                            <p>Expected shipping: May 9, 2025</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-blue-700 hover:text-blue-800 font-medium">View Details</button>
+                            <button class="text-red-600 hover:text-red-700 font-medium">Cancel Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">ShopEase</h3>
+                    <p class="text-gray-400">Your trusted online shopping destination for quality products and excellent service.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Customer Service</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">My Account</a></li>
+                        <li><a href="#" class="hover:text-white">Order Tracking</a></li>
+                        <li><a href="#" class="hover:text-white">Returns & Exchanges</a></li>
+                        <li><a href="#" class="hover:text-white">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4 text-2xl mb-4">
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l w-full">
+                        <button class="bg-blue-700 text-white px-4 py-2 rounded-r hover:bg-blue-800">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 ShopEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter orders by status
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('main .mb-6 button');
+            const orderCards = document.querySelectorAll('#orders-container > div');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button styling
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-700', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-700');
+                    });
+                    this.classList.remove('bg-white', 'text-gray-700');
+                    this.classList.add('bg-blue-700', 'text-white');
+                    
+                    // Filter orders
+                    const status = this.textContent.trim().toLowerCase();
+                    
+                    orderCards.forEach(card => {
+                        const orderStatus = card.getAttribute('data-order-status');
+                        
+                        if (status === 'all orders' || status === orderStatus) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            // Handle "View Details" click
+            document.querySelectorAll('button:not([class*="filter"])').forEach(button => {
+                if (button.textContent.trim() === 'View Details') {
+                    button.addEventListener('click', function() {
+                        const orderId = this.closest('[data-order-id]').getAttribute('data-order-id');
+                        alert(`Viewing details for order ${orderId}`);
+                        // In a real application, redirect to order details page
+                        // window.location.href = `order-details.html?order=${orderId}`;
+                    });
+                } else if (button.textContent.trim() === 'Track Order') {
+                    button.addEventListener('click', function() {
+                        const orderId = this.closest('[data-order-id]').getAttribute('data-order-id');
+                        alert(`Tracking order ${orderId}`);
+                        // In a real application, open tracking info
+                    });
+                } else if (button.textContent.trim() === 'Cancel Order') {
+                    button.addEventListener('click', function() {
+                        const orderId = this.closest('[data-order-id]').getAttribute('data-order-id');
+                        if (confirm(`Are you sure you want to cancel order ${orderId}?`)) {
+                            alert('Order has been cancelled');
+                            // In a real application, send cancel request to backend
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
