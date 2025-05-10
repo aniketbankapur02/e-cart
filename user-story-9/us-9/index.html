@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Feedback</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <h1>Order Feedback</h1>
+    </div>
+    
+    <div class="order-info">
+      <h2>Order #<span id="orderNumber">12345</span></h2>
+      <p class="delivery-date">Delivered on: <span id="deliveryDate">May 8, 2025</span></p>
+    </div>
+    
+    <form id="feedbackForm">
+      <div class="rating-container">
+        <label for="rating">Rate your experience:</label>
+        <div class="stars">
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <input type="hidden" id="rating" name="rating" value="0" required>
+        <div class="rating-text">
+          <span id="ratingDescription">Select a rating</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="feedback">Feedback description:</label>
+        <textarea id="feedback" name="feedback" rows="5" placeholder="Please share your experience with this order..." required></textarea>
+      </div>
+      
+      <button type="submit" id="submitBtn">Submit Feedback</button>
+    </form>
+    
+    <div id="status" class="hidden">
+      Thank you for your feedback!
+    </div>
+    
+    <!-- Success page will be dynamically inserted here after form submission -->
+    
+    <div class="back-link">
+      <a href="#" id="backToOrders">← Back to Orders</a>
+    </div>
+  </div>
+  
+  <script src="index.js"></script>
+</body>
+</html>
