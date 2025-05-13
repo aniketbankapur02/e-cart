@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Sample data - in a real app, this would come from the backend
   const urlParams = new URLSearchParams(window.location.search);
   const orderId = urlParams.get('orderId') || '12345';
   const deliveryDate = urlParams.get('deliveryDate') || 'May 8, 2025';
-  
+
   // Update the order information
   document.getElementById('orderNumber').textContent = orderId;
   document.getElementById('deliveryDate').textContent = deliveryDate;
-  
+
   // Setup star rating
   const stars = document.querySelectorAll('.star');
   const ratingInput = document.getElementById('rating');
@@ -20,19 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
     'Very Good',
     'Excellent'
   ];
-  
+
   // Handle star selection
   stars.forEach(star => {
-    star.addEventListener('click', function() {
+    star.addEventListener('click', function () {
       const value = parseInt(this.getAttribute('data-value'));
       ratingInput.value = value;
       updateStars(value);
       ratingDescription.textContent = ratingTexts[value];
     });
-    
-    star.addEventListener('mouseover', function() {
+
+    star.addEventListener('mouseover', function () {
       const value = parseInt(this.getAttribute('data-value'));
-      
+
       // Temporarily highlight stars on hover
       stars.forEach((s, index) => {
         if (index < value) {
@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
-  
+
   // Reset stars to selected value when mouse leaves the container
-  document.querySelector('.stars').addEventListener('mouseleave', function() {
+  document.querySelector('.stars').addEventListener('mouseleave', function () {
     updateStars(parseInt(ratingInput.value));
   });
-  
+
   function updateStars(value) {
     stars.forEach((star, index) => {
       if (index < value) {
@@ -58,33 +58,33 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   // Form submission
   const feedbackForm = document.getElementById('feedbackForm');
-  feedbackForm.addEventListener('submit', function(e) {
+  feedbackForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    
+
     const rating = ratingInput.value;
     const feedback = document.getElementById('feedback').value;
-    
+
     // Validate form
     if (rating === '0') {
       alert('Please select a rating.');
       return;
     }
-    
+
     if (!feedback.trim()) {
       alert('Please provide feedback.');
       return;
     }
-    
+
     // Here you would normally send data to the backend
     console.log('Submitting feedback:', {
       orderId: orderId,
       rating: rating,
       feedback: feedback
     });
-    
+
     // Show success page
     document.querySelector('.container').innerHTML = `
       <div class="success-page">
@@ -99,17 +99,23 @@ document.addEventListener('DOMContentLoaded', function() {
         <button id="backToOrdersBtn" class="back-button">Back to Orders</button>
       </div>
     `;
-    
+
     // Add event listener to the new back button
-    document.getElementById('backToOrdersBtn').addEventListener('click', function() {
+    document.getElementById('backToOrdersBtn').addEventListener('click', function () {
       // In a real application, this would redirect to the orders page
       window.history.back();
     });
   });
-  
+
   // Back to orders button
-  document.getElementById('backToOrders').addEventListener('click', function(e) {
+  document.getElementById('backToOrders').addEventListener('click', function (e) {
     e.preventDefault();
     window.history.back();
+  });
+  const logoutBtn = document.querySelector('.logout-btn');
+  logoutBtn.addEventListener('click', () => {
+    alert('Logging out... Redirecting to login page.');
+    // In a real application, this would redirect to the login page
+    window.location.href = "login.html";
   });
 });

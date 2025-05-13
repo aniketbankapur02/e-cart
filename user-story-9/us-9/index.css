@@ -4,9 +4,97 @@ body {
   color: black;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #0096ff;
+  color: white;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Top Bar Menu */
+.top-menu {
+  display: flex;
+  align-items: center;
+}
+
+.top-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 0 15px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.top-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Right Side Panel */
+.right-panel {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-text {
+    margin-right: 15px;
+    white-space: nowrap; /* Prevents line break */
+    display: flex;
+    align-items: center;
+    font-size: 1rem; 
+}
+.profile-icon {
+  width: 40px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #1a73e8;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.logout-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Main Content Area */
+.page-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
   padding: 20px;
 }
 
