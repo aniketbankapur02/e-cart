@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="3.1">
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.example.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/orders</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <servlet-class>com.example.servlet.FeedbackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+</web-app> 
