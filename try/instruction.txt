@@ -1,0 +1,18 @@
+Tech stack is 
+Jsp for frontend 
+servlet for backend 
+Derby db for database
+Normal jdbc connection embedded derby connection
+
+
+Embedded driver jdbc connection
+No maven
+No other jars other than derby is used
+
+
+Derby 10.0
+Apache tomcat 9
+
+In MVC pattern
+
+Make one connection for db
